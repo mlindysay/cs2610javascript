@@ -1,93 +1,3 @@
-document.title = "Fib, Pell, Trib";
-
-function fibHelper(n) {
-	var value;
-	var div = document.createElement('div');
-	div.setAttribute("class", "fib");
-
-	// leaf nodes aka. base case
-	if (n < 2) {
-		if (n === 0) {
-			value = 0;
-		} 
-		else if (n === 1) {
-			value = 1;
-		}
-		var p = document.createElement('p');
-		p.textContent = 'Fib(' + n + ') = ' + value;
-		div.appendChild(p)
-	} 
-	else {
-		var left = fibHelper(n - 1);
-		var clas = left.html.getAttribute("class");
-		left.html.setAttribute("class", clas + " fib-left");
-		
-		var right = fibHelper(n - 2);
-		clas = right.html.getAttribute("class");
-		right.html.setAttribute("class", clas + " fib-right");
-
-		value = left.value + right.value;
-		var p = document.createElement('p');
-		p.textContent = 'Fib(' + n + ') = ' + value;
-		div.appendChild(p);
-
-		div.appendChild(left.html);
-		div.appendChild(right.html);
-	}
-	return { 'value': value, 'html': div };
-}
-
-var fib = function (n, node) {
-	var tree = fibHelper(n)
-		node.appendChild(tree.html);
-		//node.style = "display: inline-block;";
-	  node.setAttribute("id", "fib");
-}
-
-function pellHelper(n) {
-	var value;
-	var div = document.createElement('div');
-	div.setAttribute("class", "pell");
-
-	// leaf nodes aka. base case
-	if (n < 2) {
-		if (n === 0) {
-			value = 0;
-		} 
-		else if (n === 1) {
-			value = 1;
-		}
-		var p = document.createElement('p');
-		p.textContent = 'Pell(' + n + ') = ' + value;
-		div.appendChild(p)
-	} 
-	else {
-		var left = pellHelper(n - 1);
-		var clas = left.html.getAttribute("class");
-		left.html.setAttribute("class", clas + " pell-left");
-		
-		var right = pellHelper(n - 2);
-		clas = right.html.getAttribute("class");
-		right.html.setAttribute("class", clas + " pell-right");
-
-		value = left.value + left.value + right.value;
-		var p = document.createElement('p');
-		p.textContent = 'Pell(' + n + ') = ' + value;
-		div.appendChild(p);
-
-		div.appendChild(left.html);
-		div.appendChild(right.html);
-	}
-	return { 'value': value, 'html': div };
-}
-
-var pell = function (n, node) {
-	var tree = pellHelper(n)
-		node.appendChild(tree.html);
-		//node.style = "display: inline-block;";
-	  node.setAttribute("id", "pell");
-}
-
 function tribHelper(n) {
 	var value;
 	var div = document.createElement('div');
@@ -114,7 +24,7 @@ function tribHelper(n) {
 		left.html.setAttribute("class", clas + " trib-left");
 		
 		var center = tribHelper(n - 2);
-		var clas = center.html.getAttribute("class");
+		var clas = left.html.getAttribute("class");
 		left.html.setAttribute("class", clas + " trib-center");
 		
 		var right = tribHelper(n - 3);
@@ -127,7 +37,6 @@ function tribHelper(n) {
 		div.appendChild(p);
 
 		div.appendChild(left.html);
-	//	div.appendChild(center.html);
 		div.appendChild(right.html);
 	}
 	return { 'value': value, 'html': div };
@@ -140,64 +49,11 @@ var trib = function (n, node) {
 	  node.setAttribute("id", "trib");
 }
 
-var createLink = function (text, link) {
-		var linkContainer = document.createElement('div');
-		linkContainer.setAttribute("class", "linkDiv");
-	    var linkElement = document.createElement('a');
-		linkElement.setAttribute("class", "linkElem");
-		linkElement.setAttribute("href", link);
-		linkElement.innerHTML = text;
-		linkContainer.appendChild(linkElement);
-		document.body.appendChild(linkContainer);
-}
-
 var style = document.createElement('style');
 style.textContent = 
-	"#fib {" +
-	"	display: inline-block;" +
-	"	width: 17000px;" +
-	"}" +
-	"" +
-	".fib {" +
-	"	background-color: rgba(0,0,255,0.1);" +
-	"}" +
-	"" +
-	".fib-left {" +
-	"	float: left;" +
-	"	display: inline-block;" +
-	"	margin-right: 4px;" +
-	"}" +
-	"" +
-	".fib-right {" +
-	"	float: right;" +
-	"	display: inline-block;" +
-	"	margin-left: 4px;" +
-	"}" +
-	"" +
-	"#pell {" +
-	"	display: inline-block;" +
-	"	width: 17000px;" +
-	"}" +
-	"" +
-	".pell {" +
-	"	background-color: rgba(255,0,0,0.1);" +
-	"}" +
-	"" +
-	".pell-left {" +
-	"	float: left;" +
-	"	display: inline-block;" +
-	"	margin-right: 4px;" +
-	"}" +
-	"" +
-	".pell-right {" +
-	"	float: right;" +
-	"	display: inline-block;" +
-	"	margin-left: 4px;" +
-	"}" +
-	"" +
 	"#trib {" +
 	"	display: inline-block;" +
-	"	width: 17000px;" +
+	"	width: 20000px;" +
 	"}" +
 	"" +
 	".trib {" +
@@ -211,9 +67,8 @@ style.textContent =
 	"}" +
 	"" +
 	".trib-center {" +
-	"	float: left;" +
 	"	display: inline-block;" +
-	"	margin-right: 4px;" +
+	"	margin: auto;" +
 	"}" +
 	"" +
 	".trib-right {" +
@@ -280,9 +135,8 @@ document.querySelector('body').appendChild(style);
 	document.body.appendChild(div);
 }('red', 'fib'));
 
-fib(11, document.querySelector('.red'))
+trib(9, document.querySelector('.red'))
 
-createLink("Click here to learn more about the Fibonacci numbers.", "https://oeis.org/A000045");
 
 // divMakerMaker() is a function which returns a function
 // divMakerMaker() takes two arguments and creates a function which requires
@@ -297,12 +151,11 @@ var divMakerMaker = function(color, id) {
 	}
 }
 
-var blueDiv = divMakerMaker('blue', 'pell');
-var yellowDiv = divMakerMaker('yellow', 'trib');
+var blueDiv = divMakerMaker('blue', 'fib');
+var yellowDiv = divMakerMaker('yellow', 'yomama');
 
 blueDiv();
-createLink("Click here to learn more about the Pell numbers.", "https://oeis.org/A000129");
 yellowDiv();
-createLink("Click here to learn more about the Tribonacci numbers.", "https://oeis.org/A000073");
-pell(11, document.querySelector('.blue'))
-trib(11, document.querySelector('.yellow'))
+
+fib(10, document.querySelector('.blue'))
+fib(11, document.querySelector('.yellow'))
