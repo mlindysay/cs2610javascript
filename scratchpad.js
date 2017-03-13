@@ -114,7 +114,7 @@ function tribHelper(n) {
 		left.html.setAttribute("class", clas + " trib-left");
 		
 		var center = tribHelper(n - 2);
-		var clas = center.html.getAttribute("class");
+		var clas = left.html.getAttribute("class");
 		left.html.setAttribute("class", clas + " trib-center");
 		
 		var right = tribHelper(n - 3);
@@ -127,7 +127,6 @@ function tribHelper(n) {
 		div.appendChild(p);
 
 		div.appendChild(left.html);
-	//	div.appendChild(center.html);
 		div.appendChild(right.html);
 	}
 	return { 'value': value, 'html': div };
@@ -211,9 +210,8 @@ style.textContent =
 	"}" +
 	"" +
 	".trib-center {" +
-	"	float: left;" +
 	"	display: inline-block;" +
-	"	margin-right: 4px;" +
+	"	margin: auto;" +
 	"}" +
 	"" +
 	".trib-right {" +
