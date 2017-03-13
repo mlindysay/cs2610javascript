@@ -1,47 +1,3 @@
-function fibHelper(n) {
-	var value;
-	var div = document.createElement('div');
-	div.setAttribute("class", "fib");
-
-	// leaf nodes aka. base case
-	if (n < 2) {
-		if (n === 0) {
-			value = 0;
-		} 
-		else if (n === 1) {
-			value = 1;
-		}
-		var p = document.createElement('p');
-		p.textContent = 'Fib(' + n + ') = ' + value;
-		div.appendChild(p)
-	} 
-	else {
-		var left = fibHelper(n - 1);
-		var clas = left.html.getAttribute("class");
-		left.html.setAttribute("class", clas + " fib-left");
-		
-		var right = fibHelper(n - 2);
-		clas = right.html.getAttribute("class");
-		right.html.setAttribute("class", clas + " fib-right");
-
-		value = left.value + right.value;
-		var p = document.createElement('p');
-		p.textContent = 'Fib(' + n + ') = ' + value;
-		div.appendChild(p);
-
-		div.appendChild(left.html);
-		div.appendChild(right.html);
-	}
-	return { 'value': value, 'html': div };
-}
-
-var fib = function (n, node) {
-	var tree = fibHelper(n)
-		node.appendChild(tree.html);
-		//node.style = "display: inline-block;";
-	  node.setAttribute("id", "fib");
-}
-
 function pellHelper(n) {
 	var value;
 	var div = document.createElement('div');
@@ -88,34 +44,13 @@ var pell = function (n, node) {
 
 var style = document.createElement('style');
 style.textContent = 
-	"#fib {" +
-	"	display: inline-block;" +
-	"	width: 20000px;" +
-	"}" +
-	"" +
-	".fib {" +
-	"	background-color: rgba(0,0,255,0.1);" +
-	"}" +
-	"" +
-	".fib-left {" +
-	"	float: left;" +
-	"	display: inline-block;" +
-	"	margin-right: 4px;" +
-	"}" +
-	"" +
-	".fib-right {" +
-	"	float: right;" +
-	"	display: inline-block;" +
-	"	margin-left: 4px;" +
-	"}" +
-	"" +
 	"#pell {" +
 	"	display: inline-block;" +
 	"	width: 20000px;" +
 	"}" +
 	"" +
 	".pell {" +
-	"	background-color: rgba(255,0,0,0.1);" +
+	"	background-color: rgba(0,0,255,0.1);" +
 	"}" +
 	"" +
 	".pell-left {" +
@@ -188,7 +123,7 @@ document.querySelector('body').appendChild(style);
 	document.body.appendChild(div);
 }('red', 'fib'));
 
-fib(11, document.querySelector('.red'))
+pell(9, document.querySelector('.red'))
 
 
 // divMakerMaker() is a function which returns a function
@@ -210,5 +145,5 @@ var yellowDiv = divMakerMaker('yellow', 'yomama');
 blueDiv();
 yellowDiv();
 
-pell(11, document.querySelector('.blue'))
-//fib(11, document.querySelector('.yellow'))
+fib(10, document.querySelector('.blue'))
+fib(11, document.querySelector('.yellow'))
