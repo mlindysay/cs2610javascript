@@ -38,6 +38,11 @@ function fibHelper(n) {
 }
 
 var fib = function (n, node) {
+	var fibTree = node.querySelector('div.fib');
+	if (fibTree) {
+		node.removeChild(fibTree);
+	}
+	
 	var tree = fibHelper(n)
 		node.appendChild(tree.html);
 		//node.style = "display: inline-block;";
@@ -82,6 +87,11 @@ function pellHelper(n) {
 }
 
 var pell = function (n, node) {
+	var pellTree = node.querySelector('div.pell');
+	if (pellTree) {
+		node.removeChild(pellTree);
+	}
+	
 	var tree = pellHelper(n)
 		node.appendChild(tree.html);
 		//node.style = "display: inline-block;";
@@ -133,6 +143,11 @@ function tribHelper(n) {
 }
 
 var trib = function (n, node) {
+	var tribTree = node.querySelector('div.trib');
+	if (tribTree) {
+		node.removeChild(tribTree);
+	}
+	
 	var tree = tribHelper(n)
 		node.appendChild(tree.html);
 		//node.style = "display: inline-block;";
@@ -271,36 +286,49 @@ document.querySelector('body').appendChild(style);
 //      later incorporate other JavaScript programs from elsewhere.
 //   1) Collect a few related program statements and keep them together in a single unit.
 // https://en.wikipedia.org/wiki/Immediately-invoked_function_expression
-( function(color, id) {
-	var div = document.createElement('div');
-	div.setAttribute('class', color + ' shadowed stuff-box');
-	div.setAttribute('id', id);
-	document.body.appendChild(div);
-}('red', 'fib'));
+//( function(color, id) {
+//	var div = document.createElement('div');
+//	div.setAttribute('class', color + ' shadowed stuff-box');
+//	div.setAttribute('id', id);
+//	document.body.appendChild(div);
+//}('red', 'fib'));
 
-fib(11, document.querySelector('.red'))
+//fib(11, document.querySelector('.red'))
 
-createLink("Click here to learn more about the Fibonacci numbers.", "https://oeis.org/A000045");
+//createLink("Click here to learn more about the Fibonacci numbers.", "https://oeis.org/A000045");
 
 // divMakerMaker() is a function which returns a function
 // divMakerMaker() takes two arguments and creates a function which requires
 // no arguments of its own, but upon invocation "remembers" the functions it
 // was created with
-var divMakerMaker = function(color, id) {
-	return function() {
-		var div = document.createElement('div');
-		div.setAttribute('class', color + ' shadowed stuff-box');
-		div.setAttribute('id', id);
-		document.body.appendChild(div);
-	}
+//var divMakerMaker = function(color, id) {
+//	return function() {
+//		var div = document.createElement('div');
+//		div.setAttribute('class', color + ' shadowed stuff-box');
+//		div.setAttribute('id', id);
+//		document.body.appendChild(div);
+//	}
+//}
+
+//var blueDiv = divMakerMaker('blue', 'pell');
+//var yellowDiv = divMakerMaker('yellow', 'trib');
+
+//blueDiv();
+//createLink("Click here to learn more about the Pell numbers.", "https://oeis.org/A000129");
+//yellowDiv();
+//createLink("Click here to learn more about the Tribonacci numbers.", "https://oeis.org/A000073");
+//pell(11, document.querySelector('.blue'))
+//trib(11, document.querySelector('.yellow'))
+
+var fibButton = function(me) {
+	var form = me.parentNode;
+	var slider = form.querySelector('input');
+	var value = slider.value;
+	fib(value, form.parentNode);
 }
 
-var blueDiv = divMakerMaker('blue', 'pell');
-var yellowDiv = divMakerMaker('yellow', 'trib');
-
-blueDiv();
-createLink("Click here to learn more about the Pell numbers.", "https://oeis.org/A000129");
-yellowDiv();
-createLink("Click here to learn more about the Tribonacci numbers.", "https://oeis.org/A000073");
-pell(11, document.querySelector('.blue'))
-trib(11, document.querySelector('.yellow'))
+var fibSlider = function(me) {
+	var form = me.parentNode;
+	var button = form.querySelector('button');
+	button.textContent = 'Fib(' + me.value + ')';
+}
